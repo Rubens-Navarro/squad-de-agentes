@@ -110,7 +110,22 @@ elif should_update_today(dt_flag):
     git_pull(templates, 'design-system-templates')
     mark_updated(dt_flag)
 
-# ── 4. Lista marcas disponíveis → injeta no contexto ─────────────────────────
+# ── 4. Lê INDEX.md da base de conhecimento ───────────────────────────────────
+index_content = ''
+index_path = kb / 'wiki' / 'INDEX.md'
+try:
+    if index_path.exists():
+        raw = index_path.read_text(encoding='utf-8').strip()
+        # Verifica se tem conteúdo real além dos cabeçalhos vazios
+        non_empty_lines = [l for l in raw.splitlines()
+                           if l.strip() and not l.strip().startswith('#')
+                           and l.strip() != '_Nenhuma query registrada ainda._']
+        if non_empty_lines:
+            index_content = raw
+except Exception as e:
+    errors.append(f"Leitura do INDEX.md: {e}")
+
+# ── 5. Lista marcas disponíveis → injeta no contexto ─────────────────────────
 brands = []
 if templates.exists():
     try:
@@ -121,7 +136,7 @@ if templates.exists():
     except Exception:
         pass
 
-# ── 5. Saída para o contexto da IA ───────────────────────────────────────────
+# ── 6. Saída para o contexto da IA ───────────────────────────────────────────
 lines = []
 
 if errors:
@@ -130,18 +145,31 @@ if errors:
 if updates:
     lines.append(f"[XQUADS] Atualizado hoje: {', '.join(updates)}")
 
+# Injeta a base de conhecimento — SEMPRE, antes de qualquer coisa
+if index_content:
+    lines.append(
+        f"━━━ BASE DE CONHECIMENTO DO USUÁRIO ━━━\n"
+        f"INSTRUÇÃO OBRIGATÓRIA: Antes de construir, modificar ou criar qualquer coisa,\n"
+        f"consulte este índice. Use o que já existe para manter continuidade, autenticidade\n"
+        f"e coerência com a história e a alma do trabalho do usuário.\n"
+        f"Abra as notas relevantes ao pedido antes de agir.\n\n"
+        f"{index_content}\n"
+        f"━━━ FIM DO ÍNDICE ━━━"
+    )
+else:
+    lines.append(
+        f"[BASE DE CONHECIMENTO] Ainda vazia em {index_path}. "
+        f"À medida que o usuário trabalhar, ela será preenchida automaticamente."
+    )
+
 if brands:
     status = "Clonado agora" if cloned else "Disponível"
     lines.append(
-        f"[DESIGN TEMPLATES {status} — {len(brands)} marcas]\n"
+        f"\n[DESIGN TEMPLATES {status} — {len(brands)} marcas]\n"
         f"{', '.join(brands)}\n"
-        f"Caminho: {templates}\n"
-        f"INSTRUÇÃO: Para qualquer trabalho de frontend/layout/UI, leia DESIGN.md das marcas "
-        f"mais inspiradoras (explore livremente — qualquer categoria). "
-        f"Combine com o conhecimento dos agentes do design-squad."
+        f"Para qualquer trabalho de frontend/layout/UI: leia DESIGN.md das marcas mais\n"
+        f"inspiradoras (explore livremente — qualquer categoria). Combine com os agentes do design-squad."
     )
-elif not errors:
-    lines.append(f"[XQUADS] Design templates indisponíveis em {templates} (repo: {repo})")
 
 if lines:
     print('\n'.join(lines))

@@ -16,17 +16,32 @@ Use sempre esses valores. Nunca assuma caminhos.
 
 ---
 
-## 1. Base de Conhecimento
+## 1. Base de Conhecimento — CONSULTAR SEMPRE, SEM EXCEÇÃO
 
 O usuário mantém uma base de conhecimento em Markdown no Obsidian.
 O caminho está em `CONFIG.md` como `KNOWLEDGE_BASE`.
 
-**Antes de começar qualquer trabalho**, leia:
+**O INDEX.md é injetado automaticamente no início de cada sessão via hook.**
+Se não estiver no contexto, leia manualmente antes de qualquer ação:
 ```
 [KNOWLEDGE_BASE]/wiki/INDEX.md
 ```
 
-Abra apenas as notas relevantes ao que o usuário pediu.
+### Por que isso é obrigatório
+
+A base de conhecimento é a memória e a alma do usuário. Ela registra:
+- O que já foi construído (sources)
+- Como o usuário pensa (concepts)
+- Com o que ele trabalha (entities)
+- O histórico de cada projeto
+
+**Antes de construir, modificar ou criar qualquer coisa**, o fluxo é:
+1. Leia o INDEX — identifique o que já existe relacionado ao pedido
+2. Abra as notas relevantes (sources, concepts, entities do contexto)
+3. Use o que já existe como base — nunca comece do zero ignorando a história
+4. Mantenha o estilo, as decisões e a continuidade do trabalho anterior
+
+Sem isso, cada sessão começa do zero e perde a autenticidade acumulada.
 
 ---
 
