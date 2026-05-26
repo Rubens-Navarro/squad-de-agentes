@@ -146,9 +146,16 @@ Quando o usuário pedir "ingira", "salva na base", "adicione ao conhecimento":
 
 ---
 
-## 5. Design Templates — Frontend Autêntico
+## 5. Design Templates — Identidade Visual Obrigatória
 
-Quando qualquer pedido envolver **criação de layout, UI, frontend, site, app, landing page, dashboard ou componente visual**:
+**GATILHO:** Qualquer pedido que envolva output visual — sem exceção:
+- Sites, landing pages, SaaS, apps, dashboards, componentes
+- Apresentações, slides, decks, PowerPoint, Keynote
+- Relatórios, documentos com layout, emails HTML
+- Qualquer coisa que alguém vai **ver**
+
+Esta regra se aplica a **TODOS os agentes**, não só ao design-squad.
+Não importa qual persona está ativa — se o output é visual, o protocolo abaixo é obrigatório.
 
 ### Passo A — Garantir que o repositório existe localmente
 
@@ -161,38 +168,43 @@ if [ ! -d "[DESIGN_TEMPLATES_PATH]" ]; then
 fi
 ```
 
-O repositório contém DESIGN.md files de marcas reais: Airbnb, Apple, Stripe, Tesla, Cursor, Notion, Figma, Linear, Vercel, Framer e outros.
+### Passo B — Analisar o universo completo ANTES de criar qualquer coisa
 
-### Passo B — Explorar e escolher os templates mais inspiradores
+**OBRIGATÓRIO antes de qualquer output visual:**
 
-Antes de escrever qualquer código de layout:
+1. Liste **todas** as pastas em `[DESIGN_TEMPLATES_PATH]/` — veja os 71 padrões disponíveis
+2. Leia os `DESIGN.md` de **pelo menos 6-8 marcas** de **categorias diferentes**
+   - Não leia só as óbvias. Um deck executivo pode ter a frieza da Bugatti. Um SaaS pode ter a textura da Supreme.
+   - Procure o que seria **inesperadamente certo**, não só o mais parecido
+3. **MISTURA É OBRIGATÓRIA** — nunca use apenas um padrão. O resultado final deve combinar elementos de 3+ marcas diferentes:
+   - Ex: tipografia da Apple + espaçamento da Linear + hierarquia de cor da Stripe
+   - Ex: estrutura de slide da McKinsey + paleta da Notion + densidade da Figma
+4. Anuncie obrigatoriamente antes de criar:
 
-1. Liste **todas** as pastas em `[DESIGN_TEMPLATES_PATH]/` para ver o universo disponível
-2. Leia rapidamente os `DESIGN.md` de 4-6 marcas — não se limite ao "óbvio" do contexto.
-   Um SaaS pode ter a elegância da Apple. Uma ferramenta dev pode pegar o minimalismo da Bugatti.
-   Procure o que seria **inesperadamente perfeito** para o produto, não só o mais parecido.
-3. Escolha 2-3 marcas que mais inspiram para este projeto específico — de qualquer categoria
-4. **ANTES de escrever qualquer código**, anuncie obrigatoriamente:
 ```
-[DESIGN] Marcas de referência escolhidas: [marca1], [marca2], [marca3]
-Por quê: [1 frase por marca explicando o que você está pegando dela para este projeto]
+[DESIGN] Universo analisado: [N marcas consultadas]
+Mistura escolhida:
+  → [marca1]: [o que está sendo usado dela e por quê]
+  → [marca2]: [o que está sendo usado dela e por quê]
+  → [marca3]: [o que está sendo usado dela e por quê]
+Resultado esperado: [1 frase descrevendo a identidade visual resultante]
 ```
 
-### Passo C — Implementar com base nos templates + conhecimento dos agentes
+### Passo C — Implementar com a mistura definida
 
 Os templates e os agentes **trabalham juntos — um não cancela o outro:**
 
 | Fonte | Contribuição |
 |-------|-------------|
-| Templates (GitHub) | Padrões visuais reais de marcas top — evita genérico |
+| Templates (71 padrões) | Base visual real — evita genérico, força identidade |
 | Design Chief | Orquestra o processo, roteia para especialistas certos |
-| UX Designer | Pesquisa, IA, fluxos, acessibilidade |
-| Design System Architect | Tokens, componentes, APIs reutilizáveis |
+| UX Designer | Pesquisa, fluxos, acessibilidade |
+| Design System Architect | Tokens, componentes, sistemas reutilizáveis |
 | UI Engineer | Implementação em código (React, Tailwind, etc.) |
 | Brad Frost | Atomic design, consistência sistêmica |
-| Visual Generator | Direção visual, mood, estética |
+| Visual Generator | Direção visual, mood, estética geral |
 
-**Resultado esperado:** layouts autênticos com identidade própria, não Tailwind genérico.
+**Resultado esperado:** output visual com identidade própria e mistura intencional — nunca genérico, nunca de uma fonte só.
 
 ### Passo D — Respeitar sempre as preferências do usuário
 
